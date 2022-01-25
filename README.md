@@ -1,2 +1,2 @@
 # HA-Big-Data
-# Analysis of Covid data and political orientation of german population.
+# Analysis of correlation covid invection and hospitalization rate and the vaccination rate in germany
