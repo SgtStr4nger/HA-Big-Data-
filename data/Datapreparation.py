@@ -2,6 +2,7 @@ import csv
 from datetime import date
 from collections import namedtuple
 
+#Data Source: https://github.com/robert-koch-institut
 vaccineData = "Aktuell_Deutschland_Landkreise_COVID-19-Impfungen.csv"
 covidData = "Aktuell_Deutschland_SarsCov2_Infektionen.csv"
 
