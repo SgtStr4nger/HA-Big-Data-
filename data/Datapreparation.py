@@ -2,11 +2,10 @@ import csv
 from datetime import date
 from collections import namedtuple
 
-
 vaccineData = "Aktuell_Deutschland_Landkreise_COVID-19-Impfungen.csv"
 covidData = "Aktuell_Deutschland_SarsCov2_Infektionen.csv"
 
-#Impfzahlen und Infektionszahlen je Ort und Datum aus Quelle auslesen
+#[Kommentar]Impfzahlen und Infektionszahlen je Ort und Datum aus Quelle auslesen
 def read_Data(path,c1,c2,c3):
     with open(path) as csvfile:
         csvreader = csv.reader(csvfile, delimiter=",")
@@ -17,19 +16,21 @@ def read_Data(path,c1,c2,c3):
 vData = read_Data(vaccineData, 0 ,1 , 4)
 cData = read_Data(covidData, 3 ,0 , 9)
 
-#Daten in einem Namedtupel zusammenführen
+#[Kommentar]Daten in einem Namedtupel zusammenführen
 TupelData = namedtuple("Tupeldata", ("Datum", "Ort", "Anzahl"))
 
 def put_Into_Tuple(Data):
     TupleList = []
     for i in range(len(Data)):
-        TupleList.append(TupelData(Data[i][0],Data[i][1], int(Data[i][2])))
+        if Data[i][1] != 'u':
+            TupleList.append(TupelData(Data[i][0],int(Data[i][1]), int(Data[i][2])))
     return TupleList
 
 vTupel = put_Into_Tuple(vData)
 cTupel = put_Into_Tuple(cData)
 
-#Aus Tupeln ein Dict formen, filterung über Ort+Datum
+
+#[Kommentar]Aus Tupeln ein Dict formen, filterung über Ort+Datum
 def acc_Data(Data):
     akkData = {}
     for row in Data:
@@ -39,7 +40,8 @@ def acc_Data(Data):
 vDict = acc_Data(vTupel)
 cDict = acc_Data(cTupel)
 
-
-#Händische Kontrolle: Anzahl Infektionen (Soll): 39 (39), Impfungen (Soll): 39 (987)
-#print(vDict[('2021-03-19', '5314')])
-print(cDict[('2022-01-20', '5314')])
+#Aufruf der Daten: vDict[('yyyy-mm-dd', 'xxxxx')]
+x = ('2022-01-15', 1003)
+#print("anzahl Impfungen:", vDict[x])
+print("anzahl Fälle:", cDict[x])
+print("anzahl Impfungen", vDict[x])
