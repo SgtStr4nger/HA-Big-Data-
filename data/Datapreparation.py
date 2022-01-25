@@ -33,7 +33,7 @@ cTupel = put_Into_Tuple(cData)
 print( vTupel )
 
 
-#[Kommentar]Aus Tupeln ein Dict formen, filterung über Ort+Datum
+#[Kommentar]Aus Tupeln ein Nested Dict formen: {LK_ID: {Datum: Value} }
 def acc_Data(Data):
     akkData = defaultdict(dict)
     for row in Data:
@@ -44,9 +44,6 @@ def acc_Data(Data):
             akkData[lk_id][date] = akkData[lk_id][date]+value
         else:
             akkData[lk_id][date] = value
-#   for row in Data:
-#       key =(row.Ort)
-#       akkData[key] = akkData.get(key,0) + row.Anzahl
     return akkData
 
 def create_dict ():
