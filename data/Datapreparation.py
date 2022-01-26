@@ -5,6 +5,7 @@ from collections import namedtuple, defaultdict
 #Data Source Impfungen/Infektionen: RKI https://github.com/robert-koch-institut (25.01.22)
 #Data Source Bevölkerungszahlen: DeStatis https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/04-kreise.html (26.01.22 / Datenstand: 31.12.2020)
 # LK 17000 : Bundesressort, keine Bevölkerungszahlen auffindbar
+#Impfungen aufteilen in Grundimmunisiert (=Impfstatus 2, da J&J als zweitimpfungen eingetragen wurden) und Geboostert 
 vaccineData = "raw-data/Aktuell_Deutschland_Landkreise_COVID-19-Impfungen.csv"
 covidData = "raw-data/Aktuell_Deutschland_SarsCov2_Infektionen.csv"
 
