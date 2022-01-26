@@ -2,7 +2,9 @@ import csv
 from datetime import date
 from collections import namedtuple, defaultdict
 
-#Data Source: https://github.com/robert-koch-institut
+#Data Source Impfungen/Infektionen: RKI https://github.com/robert-koch-institut (25.01.22)
+#Data Source Bevölkerungszahlen: DeStatis https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/04-kreise.html (26.01.22 / Datenstand: 31.12.2020)
+# LK 17000 : Bundesressort, keine Bevölkerungszahlen auffindbar
 vaccineData = "raw-data/Aktuell_Deutschland_Landkreise_COVID-19-Impfungen.csv"
 covidData = "raw-data/Aktuell_Deutschland_SarsCov2_Infektionen.csv"
 
