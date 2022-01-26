@@ -36,7 +36,7 @@ cTupel = put_Into_Tuple(cData)
 print( vTupel )
 
 
-#[Kommentar]Aus Tupeln ein Nested Dict formen: {LK_ID: {Datum: Value} }
+#[Kommentar] Aus Tupeln ein Nested Dict formen: {LK_ID: {Datum: Value} }
 def acc_Data(Data):
     akkData = defaultdict(dict)
     for row in Data:
