@@ -33,7 +33,7 @@ def put_Into_Tuple(Data):
 
 vTupel = put_Into_Tuple(vData)
 cTupel = put_Into_Tuple(cData)
-print( vTupel )
+#print( vTupel )
 
 
 #[Kommentar] Aus Tupeln ein Nested Dict formen: {LK_ID: {Datum: Value} }
@@ -49,18 +49,9 @@ def acc_Data(Data):
             akkData[lk_id][date] = value
     return akkData
 
-def create_dict ():
-    vDict = acc_Data(vTupel)
-    cDict = acc_Data(cTupel)
-    return vDict, cDict
+def C_Datensatz_erstellen ():
+    return acc_Data(cTupel)
 
-vDict = acc_Data(vTupel)
-cDict = acc_Data(cTupel)
-print(cDict)
-
-#Aufruf der Daten: vDict[('yyyy-mm-dd', 'xxxxx')]
-#x = ('2022-01-15', 1003)
-#print("anzahl Impfungen:", vDict[x])
-#print("Anzahl Fälle:", cDict[x])
-#print("Anzahl Impfungen", vDict[x])
-#print(vDict)
+#vDict = acc_Data(vTupel)
+#cDict = acc_Data(cTupel)
+#print(cDict)
