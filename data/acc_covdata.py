@@ -1,24 +1,14 @@
 import csv
 from datetime import date
 from collections import namedtuple, defaultdict
+import util
 
 #Data Source Impfungen/Infektionen: RKI https://github.com/robert-koch-institut (25.01.22)
 #Data Source Bevölkerungszahlen: DeStatis https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/04-kreise.html (26.01.22 / Datenstand: 31.12.2020)
 # LK 17000 : Bundesressort → Daten aus Impfungen durch den Bund, keine Ortsangabe, ergo keine Bevölkerungszahlen auffindbar
 #Impfungen aufteilen in Grundimmunisiert (=Impfstatus 2, da J&J als zweitimpfungen eingetragen wurden) und Geboostert 
 
-covidData = "raw-data/Aktuell_Deutschland_SarsCov2_Infektionen.csv"
-
-#[Kommentar]Impfzahlen und Infektionszahlen je Ort und Datum aus Quelle auslesen
-def read_Data():
-    with open(covidData) as csvfile:
-        csvreader = csv.reader(csvfile, delimiter=",")
-        data = [[row[3], row[0], row[9]] for row in csvreader]
-        #Data zu Testzwecken auf alle Datensätze begrenzt
-        return data[1:]
-
-cData = read_Data()
-
+cData = util.read_csvData("raw-data/Aktuell_Deutschland_SarsCov2_Infektionen.csv", 3,0,9, ",")
 
 #[Kommentar]Daten in einem Namedtupel zusammenführen
 TupelData = namedtuple("Tupeldata", ("Datum", "Ort", "Anzahl"))

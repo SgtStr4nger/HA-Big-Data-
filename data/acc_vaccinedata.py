@@ -2,13 +2,13 @@ import csv
 import datetime
 import pandas as pd
 from collections import namedtuple, defaultdict
+import util
 
 #Data Source Impfungen/Infektionen: RKI https://github.com/robert-koch-institut (25.01.22)
 #Data Source Bevölkerungszahlen: DeStatis https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/04-kreise.html (26.01.22 / Datenstand: 31.12.2020)
 # LK 17000 : Bundesressort → Daten aus Impfungen durch den Bund, keine Ortsangabe, ergo keine Bevölkerungszahlen auffindbar
 #Impfungen aufteilen in Grundimmunisiert (=Impfstatus 2, da J&J als zweitimpfungen eingetragen wurden) und Geboostert 
-vaccineData = "raw-data\Aktuell_Deutschland_Landkreise_COVID-19-Impfungen.csv"
-bevData = "raw-data\Bev_Kreise.csv"
+vaccineData = "data\\raw-data\\Aktuell_Deutschland_Landkreise_COVID-19-Impfungen.csv"
 
 #[Kommentar]Datum, Ort, Impfung(Grundimmuniesierung, Booster), Anzahl aus Quelle auslesen
 def read_vaccData():
@@ -18,20 +18,8 @@ def read_vaccData():
         #Data zu Testzwecken auf alle Datensätze begrenzt
         return data[1:]
 
-#[Kommentar] Bevölkerungsdaten je Landkreis auslesen
-def read_bevData():
-    with open(bevData) as csvfile:
-        csvreader = csv.reader(csvfile, delimiter=";")
-        data = [[row[0], row[1]] for row in csvreader]
-        #Keine Überschrift → Return everything
-        return data
 
-def bev_to_Dict():
-    bevData = read_bevData()
-    bevDict = {int(row[0]):int(row[1]) for row in bevData}
-    return bevDict
-
-bevDict = bev_to_Dict()
+bevDict = util.bev_to_Dict()
 vaccData = read_vaccData()
 
 # # #[Kommentar]Daten in einem Namedtupel zusammenführen

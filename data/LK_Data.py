@@ -1,8 +1,8 @@
 # Everything related LK, LK_ID
 
-from data.acc_vaccinedata import bev_to_Dict
+import util
 
-bevData = bev_to_Dict()
+bevData = util.bev_to_Dict()
 
 #Accumulate BevData from all LK
 def DictBevBundesland():
