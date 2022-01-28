@@ -23,7 +23,7 @@ def read_bevData():
     with open(bevData) as csvfile:
         csvreader = csv.reader(csvfile, delimiter=";")
         data = [[row[0], row[1]] for row in csvreader]
-        #Data zu Testzwecken auf alle Datensätze begrenzt
+        #Keine Überschrift → Return everything
         return data
 
 def bev_to_Dict():
