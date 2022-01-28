@@ -8,10 +8,10 @@ bevData = bev_to_Dict()
 def DictBevBundesland():
     BBev_Dict = {}
     for i in range (1,17):
+        BBev_Dict[i]=0
         for lk_id in bevData:
             if int(lk_id/1000)==i:
-                BBev_Dict[i]=bevData[lk_id]
+                BBev_Dict.update({i: (BBev_Dict[i]+bevData[lk_id]) })
     return BBev_Dict
 
-
-print(DictBevBundesland())
+DictBev = DictBevBundesland()
