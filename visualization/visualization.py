@@ -1,6 +1,6 @@
 # Visualizing imported data for better understanding of relations of data
-from acc_covdata import C_Datensatz_erstellen
-from acc_vaccinedata import V_Datensatz_erstellen
+from data.acc_covdata import C_Datensatz_erstellen
+from data.acc_vaccinedata import V_Datensatz_erstellen
 import matplotlib.pyplot as plt
 
 
