@@ -1,8 +1,6 @@
 import csv
 from collections import namedtuple, defaultdict
 
-#Data Source Bevölkerungszahlen: DeStatis https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/04-kreise.html (26.01.22 / Datenstand: 31.12.2020)
-
 def read_csvData(path, r1, r2, r3, delim):
     with open(path) as csvfile:
         csvreader = csv.reader(csvfile, delimiter=delim)

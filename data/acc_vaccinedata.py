@@ -4,10 +4,6 @@ import pandas as pd
 from collections import namedtuple, defaultdict
 import util
 
-#Data Source Impfungen/Infektionen: RKI https://github.com/robert-koch-institut (25.01.22)
-#Data Source Bevölkerungszahlen: DeStatis https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/04-kreise.html (26.01.22 / Datenstand: 31.12.2020)
-# LK 17000 : Bundesressort → Daten aus Impfungen durch den Bund, keine Ortsangabe, ergo keine Bevölkerungszahlen auffindbar
-#Impfungen aufteilen in Grundimmunisiert (=Impfstatus 2, da J&J als zweitimpfungen eingetragen wurden) und Geboostert 
 vaccineData = "data\\raw-data\\Aktuell_Deutschland_Landkreise_COVID-19-Impfungen.csv"
 
 #[Kommentar]Datum, Ort, Impfung(Grundimmuniesierung, Booster), Anzahl aus Quelle auslesen
@@ -17,7 +13,6 @@ def read_vaccData():
         data = [[row[0], row[1], row[3], row[4]] for row in csvreader]
         #Data zu Testzwecken auf alle Datensätze begrenzt
         return data[1:]
-
 
 bevDict = util.bev_to_Dict()
 vaccData = read_vaccData()
@@ -35,7 +30,6 @@ def put_Into_Tuple():
                 TupleList.append(TupelData((vaccData[i][0]), int(vaccData[i][1]), 0, int(vaccData[i][3])))
     return TupleList
 
-vTupel = put_Into_Tuple()
 
 # Erstelle Dict mit LK_ID, Date und Liste [0, 0]
 def createDict ():
@@ -46,7 +40,8 @@ def createDict ():
             emptyDict[lk][Date.strftime('%Y-%m-%d')] = [0, 0]
     return emptyDict
 
-# #[Kommentar]Aus Tupeln ein Nested Dict formen: {LK_ID: {Datum: [Grundimmun][Booster]} }
+# Aus Tupeln ein Nested Dict formen: {LK_ID: {Datum: [Grundimmun][Booster]} }
+vTupel = put_Into_Tuple()
 def acc_Data(empty_dict):
     akkData = empty_dict
     for row in vTupel :
