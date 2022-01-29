@@ -52,7 +52,7 @@ def acc_Data(empty_dict):
     for row in vTupel :
         date, lk_id, basicimmun, boost = row[0], row[1], row[2], row[3]
 # [Kommentar] Einordnen der Zahlen in Dict, ausgenommen LK 17000 → Bundesresort
-        if lk_id in akkData and date in akkData[lk_id] and lk_id!=17000:
+        if lk_id in akkData and date in akkData[lk_id] and lk_id != 17000:
             akkData[lk_id].update({date: [x + y for x, y in zip(akkData[lk_id][date], [basicimmun, boost])]})
     return akkData
 
