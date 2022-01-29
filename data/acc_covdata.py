@@ -20,11 +20,6 @@ def C_Datensatz_erstellen():
 
 # Corona Data based on population of LK
 def C_Data_per_bev(CDict, BevDict):
-    #Exception for Berlin (lk_id 1100X), as there is only population data for whole Berlin
-    for lk_id in range (11001, 11013):
-        for date in CDict[lk_id]:
-            CDict[11000].update({date: CDict[lk_id][date]})
-        del CDict[lk_id]
     for lk_id in CDict:
         if lk_id in BevDict:
             for date in CDict[lk_id]:
