@@ -25,13 +25,8 @@ def bev_to_Dict():
 def acc_Data(data):
     akkData = defaultdict(dict)
     for row in data:
-        date = row[0]
-        lk_id = row[1]
-        value = row[2]
-        if lk_id in akkData and date in akkData[lk_id]:
-            akkData[lk_id][date] = akkData[lk_id][date]+value
-        else:
-            akkData[lk_id][date] = value
+        date, lk_id, value = row  
+        akkData[lk_id][date] = akkData.get(lk_id,{}).get(date,0) + value
     return akkData
 #why tho? 
 def C_Datensatz_erstellen (data):
