@@ -1,6 +1,6 @@
 # Everything related LK, LK_ID
 
-import util
+from data import util
 
 bevData = util.bev_to_Dict()
 

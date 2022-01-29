@@ -1,9 +1,9 @@
 import csv
 from datetime import date
 from collections import namedtuple, defaultdict
-import util
+from data import util
 
-cData = util.read_csvData("raw-data\\Aktuell_Deutschland_SarsCov2_Infektionen.csv", 3,0,9, ",")
+cData = util.read_csvData("../data/raw-data/Aktuell_Deutschland_SarsCov2_Infektionen.csv", 3,0,9, ",")
 
 #[Kommentar]Daten in einem Namedtupel zusammenführen
 TupelData = namedtuple("Tupeldata", ("Datum", "Ort", "Anzahl"))
@@ -15,8 +15,10 @@ def put_Into_Tuple():
             TupleList.append(TupelData(cData[i][0],int(cData[i][1]), int(cData[i][2])))
     return TupleList
 
-#Fallzahlen in ein Namedtupel formen und daraus ein Dict bilden
-cTupel = put_Into_Tuple()
-fallzahlen = util.acc_Data(cTupel)
+def C_Datensatz_erstellen():
+    return util.acc_Data(put_Into_Tuple())
 
-print(fallzahlen)
+#Fallzahlen in ein Namedtupel formen und daraus ein Dict bilden
+fallzahlen = util.acc_Data(put_Into_Tuple())
+
+#print(C_Datensatz_erstellen())
