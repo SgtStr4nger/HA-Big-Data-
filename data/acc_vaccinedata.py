@@ -3,6 +3,7 @@ import datetime
 import pandas as pd
 from collections import namedtuple, defaultdict
 from data import util
+from data.LK_Data import DictBevBundesland
 
 vaccineData = "../data/raw-data/Aktuell_Deutschland_Landkreise_COVID-19-Impfungen.csv"
 
@@ -15,6 +16,7 @@ def read_vaccData():
         return data[1:]
 
 bevDict = util.bev_to_Dict()
+DictBLBev = DictBevBundesland()
 vaccData = read_vaccData()
 
 # # #[Kommentar]Daten in einem Namedtupel zusammenführen
@@ -32,12 +34,12 @@ def put_Into_Tuple():
 
 
 # Erstelle Dict mit LK_ID, Date und Liste [0, 0]
-def createDict ():
+def createDict (BaseDict):
     date_generated = pd.date_range(datetime.date(2019, 6, 1),datetime.date(2022, 2, 16))
     emptyDict = defaultdict(dict)
-    for lk in bevDict:
+    for id in BaseDict:
         for Date in date_generated:
-            emptyDict[lk][Date.strftime('%Y-%m-%d')] = [0, 0]
+            emptyDict[id][Date.strftime('%Y-%m-%d')] = [0, 0]
     return emptyDict
 
 # Aus Tupeln ein Nested Dict formen: {LK_ID: {Datum: [Grundimmun][Booster]} }
@@ -62,25 +64,36 @@ def Dict_kummulieren ( Dict):
 # Addiere Impfungen am Date zu denen vom Tag zuvor
             if Dict[lk_id].get(Date_before) != None:
                 Dict[lk_id].update({Date: [x + y for x, y in zip(Dict[lk_id][Date_before], Dict[lk_id][Date]) ] })
-
-# Teile Impfungen pro Tag durch Bevölkerung des Landkreises
-        for Date in Dict[lk_id]:
-            Dict[lk_id].update({Date: [x / bevDict[lk_id] for x in Dict[lk_id][Date]]})
-
     return Dict
 
+
+def V_Dict_BL( lk_Dict ):
+# kummuliere Impfungen aller LK eines BLs
+    VDict_BL=createDict(DictBevBundesland())
+    for bl_id in VDict_BL:
+        for lk_id in lk_Dict:
+            if int(lk_id/1000)==bl_id:
+                for date in lk_Dict[lk_id]:
+                    VDict_BL[bl_id].update({date: [x + y for x, y in zip( VDict_BL[bl_id][date], lk_Dict[lk_id][date] ) ] })
+
+# Impfquote des BL
+        for date in VDict_BL[bl_id]:
+            VDict_BL[bl_id].update({date: [x / DictBLBev[bl_id] for x in VDict_BL[bl_id][date]]})
+
+    return VDict_BL
+
+
+
+
 def V_Datensatz_erstellen():
-    return Dict_kummulieren(acc_Data(createDict()))
+    return V_Dict_BL(Dict_kummulieren(acc_Data(createDict(bevDict))))
 
+
+# Print Impfquote am 16.02.2022 aller IDs im gegebenen Dict.
 def Print_V_Dataset(Data):
-    for lk_id in Data:
-        print(lk_id, ":", Data[lk_id]['2022-02-16'])
+    for id in Data:
+        print(id, ":", Data[id]['2022-02-16'])
 
 
-V_Datensatz = V_Datensatz_erstellen()
-#Print_V_Dataset(V_Datensatz)
-#print(V_Datensatz)
 
-#print(V_Datensatz[16077]['2022-02-16'][0])
-
-
+#Print_V_Dataset(V_Dict_BL())
