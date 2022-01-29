@@ -1,8 +1,9 @@
 # Visualizing imported data for better understanding of relations of data
-from data.acc_covdata import C_Datensatz_erstellen
+from data.acc_covdata import C_Datensatz_erstellen, C_Data_per_bev
 from data.acc_vaccinedata import V_Datensatz_erstellen
 import matplotlib.pyplot as plt
 
+from data.util import bev_to_Dict
 
 C_Dict = C_Datensatz_erstellen()
 V_Dict = V_Datensatz_erstellen()
@@ -33,3 +34,4 @@ def plot_data(V_Data, C_Data):
 
 
 plot_data(V_Dict, C_Dict)
+plot_data(V_Dict, C_Data_per_bev(C_Dict, bev_to_Dict()))
