@@ -2,10 +2,10 @@ import csv
 import datetime
 import pandas as pd
 from collections import namedtuple, defaultdict
-from data import util
-from data.LK_Data import DictBevBundesland
+import util
+import LK_Data
 
-vaccineData = "../data/raw-data/Aktuell_Deutschland_Landkreise_COVID-19-Impfungen.csv"
+vaccineData = "./data/raw-data/Aktuell_Deutschland_Landkreise_COVID-19-Impfungen.csv"
 
 #[Kommentar]Datum, Ort, Impfung(Grundimmuniesierung, Booster), Anzahl aus Quelle auslesen
 def read_vaccData():
@@ -16,7 +16,7 @@ def read_vaccData():
         return data[1:]
 
 bevDict = util.bev_to_Dict()
-DictBLBev = DictBevBundesland()
+DictBLBev = LK_Data.DictBevBundesland()
 vaccData = read_vaccData()
 
 # # #[Kommentar]Daten in einem Namedtupel zusammenführen
@@ -69,7 +69,7 @@ def Dict_kummulieren ( Dict):
 
 def V_Dict_BL( lk_Dict ):
 # kummuliere Impfungen aller LK eines BLs
-    VDict_BL=createVDict(DictBevBundesland())
+    VDict_BL=createVDict(LK_Data.DictBevBundesland())
     for bl_id in VDict_BL:
         for lk_id in lk_Dict:
             if int(lk_id/1000)==bl_id:
