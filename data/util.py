@@ -23,7 +23,7 @@ def bev_to_Dict():
     return bevDict
 
 def createCDict (BaseDict):
-    date_generated = pd.date_range(datetime.date(2019, 6, 1),datetime.date(2022, 2, 16))
+    date_generated = pd.date_range(datetime.date(2019, 6, 1),datetime.date(2022, 1, 16))
     emptyDict = defaultdict(dict)
     for id in BaseDict:
         for Date in date_generated:
@@ -38,7 +38,7 @@ def acc_Data(data):
         lk_id = row[1]
         value = row[2]
         # Exception for Berlin (lk_id 1100X), as there is only population data for whole Berlin
-        if lk_id in range (11000,11013):
+        if lk_id in range (11000,11013) and date in akkData[lk_id]:
             akkData[11000][date] = akkData[11000][date]+value
         elif lk_id in akkData and date in akkData[lk_id]:
             akkData[lk_id][date] = akkData[lk_id][date]+value

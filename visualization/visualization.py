@@ -1,16 +1,15 @@
 # Visualizing imported data for better understanding of relations of data
-import datetime
+
+import matplotlib.pyplot as plt, pandas as pd, datetime
+
 
 from data.acc_covdata import C_Datensatz_erstellen, C_Data_per_bev
 from data.acc_hospidata import H_Rate
 from data.acc_vaccinedata import V_Datensatz_erstellen
-import matplotlib.pyplot as plt, pandas as pd
-
-from data.util import bev_to_Dict
 
 C_Dict = C_Datensatz_erstellen()
 V_Dict = V_Datensatz_erstellen()
-standard_date_range = pd.date_range(datetime.date(2019, 6, 1),datetime.date(2022, 2, 16)).strftime('%Y-%m-%d').tolist()
+standard_date_range = pd.date_range(datetime.date(2019, 6, 1),datetime.date(2022, 1, 16)).strftime('%Y-%m-%d').tolist()
 
 def plot_data(V_Data, C_Data, date_range=standard_date_range):
     x = []
@@ -45,5 +44,5 @@ W2 = [2020, 6, 1, 2021, 3, 1]
 W3 = [2021, 3, 1, 2022, 2, 16]
 W2u3 = [2020, 6, 1, 2022, 2, 16]
 plot_data(V_Dict, C_Dict, TimeRange(W2u3))
-plot_data(V_Dict, C_Data_per_bev(C_Dict, bev_to_Dict()), TimeRange(W2u3))
+plot_data(V_Dict, C_Data_per_bev(), TimeRange(W2u3))
 plot_data(V_Dict, H_Rate(), TimeRange(W2u3))

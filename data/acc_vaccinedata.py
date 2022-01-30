@@ -34,7 +34,7 @@ def put_Into_Tuple():
 
 # Erstelle Dict mit LK_ID, Date und Liste [0, 0]
 def createVDict (BaseDict):
-    date_generated = pd.date_range(datetime.date(2019, 6, 1),datetime.date(2022, 2, 16))
+    date_generated = pd.date_range(datetime.date(2019, 6, 1),datetime.date(2022, 1, 16))
     emptyDict = defaultdict(dict)
     for id in BaseDict:
         for Date in date_generated:
@@ -88,10 +88,10 @@ def V_Datensatz_erstellen():
     return V_Dict_BL(Dict_kummulieren(acc_Data(createVDict(bevDict))))
 
 
-# Print Impfquote am 16.02.2022 aller IDs im gegebenen Dict.
+# Print Impfquote am 16.01.2022 aller IDs im gegebenen Dict.
 def Print_V_Dataset(Data):
     for id in Data:
-        print(id, ":", Data[id]['2022-02-16'])
+        print(id, ":", Data[id]['2022-01-16'])
 
 
 
