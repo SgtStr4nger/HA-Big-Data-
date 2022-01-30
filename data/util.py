@@ -11,7 +11,7 @@ def read_csvData(path, r1, r2, r3, delim):
 
 #Bevölkerungsdaten je Landkreis auslesen
 def read_bevData():
-    with open("./data/raw-data/Bev_Kreise.csv") as csvfile:
+    with open("../data/raw-data/Bev_Kreise.csv") as csvfile:
         csvreader = csv.reader(csvfile, delimiter=";")
         data = [[row[0], row[1]] for row in csvreader]
         #Keine Überschrift → Return everything

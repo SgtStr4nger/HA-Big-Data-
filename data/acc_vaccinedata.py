@@ -2,10 +2,9 @@ import csv
 import datetime
 import pandas as pd
 from collections import namedtuple, defaultdict
-import util
-import LK_Data
+from data import util, LK_Data
 
-vaccineData = "./data/raw-data/Aktuell_Deutschland_Landkreise_COVID-19-Impfungen.csv"
+vaccineData = "../data/raw-data/Aktuell_Deutschland_Landkreise_COVID-19-Impfungen.csv"
 
 #[Kommentar]Datum, Ort, Impfung(Grundimmuniesierung, Booster), Anzahl aus Quelle auslesen
 def read_vaccData():
