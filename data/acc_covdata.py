@@ -18,6 +18,16 @@ def put_Into_Tuple():
 def C_Datensatz_erstellen():
     return util.acc_Data(put_Into_Tuple())
 
+# Corona Data based on population of LK
+def C_Data_per_bev(CDict, BevDict):
+    for lk_id in CDict:
+        if lk_id in BevDict:
+            for date in CDict[lk_id]:
+                CDict[lk_id].update({date: (CDict[lk_id][date]/BevDict[lk_id]) } )
+        else: print(lk_id)
+    return CDict
+
+
 #Fallzahlen in ein Namedtupel formen und daraus ein Dict bilden
 fallzahlen = util.acc_Data(put_Into_Tuple())
 
