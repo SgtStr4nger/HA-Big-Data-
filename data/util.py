@@ -38,8 +38,9 @@ def acc_Data(data):
         lk_id = row[1]
         value = row[2]
         # Exception for Berlin (lk_id 1100X), as there is only population data for whole Berlin
-        if lk_id in range (11000,11013) and date in akkData[lk_id]:
-            akkData[11000][date] = akkData[11000][date]+value
+        if lk_id in range (11000,11013):
+            if date in akkData[11000]:
+                akkData[11000][date] = akkData[11000][date]+value
         elif lk_id in akkData and date in akkData[lk_id]:
             akkData[lk_id][date] = akkData[lk_id][date]+value
     return akkData
