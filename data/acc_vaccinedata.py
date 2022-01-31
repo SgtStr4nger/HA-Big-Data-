@@ -43,8 +43,8 @@ def createVDict (BaseDict):
 
 # Aus Tupeln ein Nested Dict formen: {LK_ID: {Datum: [Grundimmun][Booster]} }
 vTupel = put_Into_Tuple()
-def acc_Data(empty_dict):
-    akkData = empty_dict
+def acc_Data():
+    akkData = createVDict(bevDict)
     for row in vTupel :
         date, lk_id, basicimmun, boost = row[0], row[1], row[2], row[3]
 # [Kommentar] Einordnen der Zahlen in Dict, ausgenommen LK 17000 → Bundesresort
@@ -52,7 +52,8 @@ def acc_Data(empty_dict):
             akkData[lk_id].update({date: [x + y for x, y in zip(akkData[lk_id][date], [basicimmun, boost])]})
     return akkData
 
-def Dict_kummulieren ( Dict):
+def Dict_kummulieren ( ):
+    Dict = acc_Data()
     for lk_id in Dict:
         for Date in Dict[lk_id]:
 
@@ -66,8 +67,9 @@ def Dict_kummulieren ( Dict):
     return Dict
 
 
-def V_Dict_BL( lk_Dict ):
+def V_Dict_BL():
 # kummuliere Impfungen aller LK eines BLs
+    lk_Dict= Dict_kummulieren()
     VDict_BL=createVDict(LK_Data.DictBevBundesland())
     for bl_id in VDict_BL:
         for lk_id in lk_Dict:
@@ -81,11 +83,19 @@ def V_Dict_BL( lk_Dict ):
 
     return VDict_BL
 
-
+def V_Dict_LK ():
+    VDictBl = V_Dict_BL()
+    VDictLK = createVDict(bevDict)
+    for lk_id in VDictLK:
+        for bl_id in VDictBl:
+            if int(lk_id / 1000) == bl_id:
+                for date in VDictLK[lk_id]:
+                    VDictLK[lk_id].update({date: VDictBl[int(lk_id / 1000)][date]})
+    return VDictLK
 
 
 def V_Datensatz_erstellen():
-    return V_Dict_BL(Dict_kummulieren(acc_Data(createVDict(bevDict))))
+    return V_Dict_BL()
 
 
 # Print Impfquote am 16.01.2022 aller IDs im gegebenen Dict.
