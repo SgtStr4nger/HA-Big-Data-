@@ -43,6 +43,10 @@ W1 = [2020, 3, 1, 2020, 6, 1]
 W2 = [2020, 6, 1, 2021, 3, 1]
 W3 = [2021, 3, 1, 2022, 2, 16]
 W2u3 = [2020, 6, 1, 2022, 2, 16]
-plot_data(V_Dict, C_Dict, TimeRange(W2u3))
+#plot_data(V_Dict, C_Dict, TimeRange(W2u3))
+plot_data(V_Dict, C_Data_per_bev(), TimeRange(W2))
+plot_data(V_Dict, H_Rate(), TimeRange(W2))
+plot_data(V_Dict, C_Data_per_bev(), TimeRange(W3))
+plot_data(V_Dict, H_Rate(), TimeRange(W3))
 plot_data(V_Dict, C_Data_per_bev(), TimeRange(W2u3))
 plot_data(V_Dict, H_Rate(), TimeRange(W2u3))
