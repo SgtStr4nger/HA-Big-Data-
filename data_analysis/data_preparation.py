@@ -35,11 +35,18 @@ def DF_V ():
 
 
 
-D1= 710
-print(CperB_df[D1:])
+D1= 700
+print("C per B:\n",CperB_df[D1:])
 V1_df, V2_df =DF_V()
-print(HperB_df[D1:])
+print("H per B:\n",HperB_df[D1:])
+print("V1 per B:\n",V1_df[D1:])
+HperCperB_df= (HperB_df[D1:]/CperB_df[D1:])
+print("H/C per B:\n",HperCperB_df)
 
-print(V1_df[D1:].corrwith(CperB_df[D1:]))
-print(V1_df[D1:].corrwith(HperB_df[D1:]))
+print("Corr V1 C per B:\n",V1_df[D1:].corrwith(CperB_df[D1:]))
+print("Corr V1 H per B:\n",V1_df[D1:].corrwith(HperB_df[D1:]))
+print("Corr V1 H/C per B:\n",V1_df[D1:].corrwith(HperCperB_df))
+print("Corr V1 C per B mean:\n",V1_df[D1:].corrwith(CperB_df[D1:]).mean())
+print("Corr V1 H per B mean:\n",V1_df[D1:].corrwith(HperB_df[D1:]).mean())
+print("Corr V1 H/C per B mean:\n",V1_df[D1:].corrwith(HperCperB_df).mean())
 #print(CperB_df.corrwith(HperB_df))
