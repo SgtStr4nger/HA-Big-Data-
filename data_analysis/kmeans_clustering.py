@@ -37,7 +37,7 @@ def transformDimensions (df=normalizeDF()):
     return pca.fit_transform(df.transpose())
 
 def KMeans_on_df( df= transformDimensions(), df_base=MovingAverage()):
-    kmeans = KMeans(n_clusters=cluster_count, max_iter=5000)
+    kmeans = KMeans(n_clusters=cluster_count,init='k-means++', max_iter=500000)
     print('transforemd df:\n', df,'\nLength:', len(df))
     labels = kmeans.fit_predict(df)
     plt.figure(figsize=(25, 10))
