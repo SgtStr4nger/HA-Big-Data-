@@ -10,7 +10,6 @@ from sklearn.cluster import KMeans
 from matplotlib import pyplot as plt
 
 cluster_count = 16
-pd.set_option('display.max_rows', 20)
 
 def prepareDF():
     try:
@@ -20,7 +19,7 @@ def prepareDF():
         #C_Data = Load_C_Data()
 
     C_Data.index = pd.to_datetime(C_Data.index)
-# Dropping Column 16056, filled with NULL
+# Dropping Column 16056, filled with NULL → Eisenach, merched with Aachen? (to be proofed)
     C_Data = C_Data.drop(columns=[16056])
     return C_Data
 
@@ -31,14 +30,14 @@ def MovingAverage(df=prepareDF()):
 def normalizeDF(df = MovingAverage()):
     return (df-df.min())/(df.max()-df.min())
 
+# Ab hier ist Auswertung
+
 def transformDimensions (df=normalizeDF()):
-    print("Normalized df:",df)
     pca = PCA(n_components=2)
     return pca.fit_transform(df.transpose())
 
 def KMeans_on_df( df= transformDimensions(), df_base=MovingAverage()):
     kmeans = KMeans(n_clusters=cluster_count,init='k-means++', max_iter=500000)
-    print('transforemd df:\n', df,'\nLength:', len(df))
     labels = kmeans.fit_predict(df)
     plt.figure(figsize=(25, 10))
     plt.scatter(df[:, 0], df[:, 1], c=labels, s=300)
@@ -51,9 +50,7 @@ def KMeans_on_df( df= transformDimensions(), df_base=MovingAverage()):
     row_i = 0
     column_j = 0
 
-    print(len(labels))
     for label in set(labels):
-        print(label)
         cluster = []
         for i in range(len(labels)):
             if (labels[i] == label):
@@ -61,10 +58,7 @@ def KMeans_on_df( df= transformDimensions(), df_base=MovingAverage()):
                 cluster.append(df_base.iloc[:,i])
         if len(cluster) > 0:
             cluster_df = pd.concat(cluster, axis=1, keys=[s.name for s in cluster])
-            print(cluster_df)
-            print(cluster_df.mean(axis=1))
             axs[row_i, column_j].plot(cluster_df.mean(axis=1), c="red")
-            #axs[row_i, column_j].plot(np.average(cluster_df, axis=1), c="red")
         axs[row_i, column_j].set_title("Cluster"+str(column_j+(row_i*4)) )
         column_j += 1
         if column_j % plot_count == 0:
