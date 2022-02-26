@@ -1,12 +1,11 @@
-import csv
-from datetime import date
-from collections import namedtuple, defaultdict
+from collections import namedtuple
+
 from data import util
 from data.util import bev_to_Dict
 
-cData = util.read_csvData("../data/raw-data/Aktuell_Deutschland_SarsCov2_Infektionen.csv", 3,0,9, ",")
+cData = util.read_csvData("./data/raw-data/Aktuell_Deutschland_SarsCov2_Infektionen.csv", 3,0,9, ",")
 
-#[Kommentar]Daten in einem Namedtupel zusammenführen
+#Daten in einem Namedtupel zusammenführen
 TupelData = namedtuple("Tupeldata", ("Datum", "Ort", "Anzahl"))
 
 def put_Into_Tuple():
@@ -29,9 +28,3 @@ def C_Data_per_bev():
                 CDict[lk_id].update({date: (CDict[lk_id][date]/BevDict[lk_id] * 100000) } )
         else: print(lk_id)
     return CDict
-
-
-#Fallzahlen in ein Namedtupel formen und daraus ein Dict bilden
-fallzahlen = util.acc_Data(put_Into_Tuple())
-
-#print(C_Datensatz_erstellen())

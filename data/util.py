@@ -1,17 +1,17 @@
 import csv, datetime
 import pandas as pd
-from collections import namedtuple, defaultdict
+from collections import defaultdict
 
 def read_csvData(path, r1, r2, r3, delim):
     with open(path) as csvfile:
         csvreader = csv.reader(csvfile, delimiter=delim)
         data = [[row[r1], row[r2], row[r3]] for row in csvreader]
-        #Data zu Testzwecken auf alle Datensätze begrenzt
+        #Ohne Überschriften
         return data[1:]
 
 #Bevölkerungsdaten je Landkreis auslesen
 def read_bevData():
-    with open("../data/raw-data/Bev_Kreise.csv") as csvfile:
+    with open("./data/raw-data/Bev_Kreise.csv") as csvfile:
         csvreader = csv.reader(csvfile, delimiter=";")
         data = [[row[0], row[1]] for row in csvreader]
         #Keine Überschrift → Return everything
@@ -30,7 +30,7 @@ def createCDict (BaseDict):
             emptyDict[id][Date.strftime('%Y-%m-%d')] = 0
     return emptyDict
 
-#[Kommentar] Aus Tupeln ein Nested Dict formen: {LK_ID: {Datum: Value} }
+#Aus Tupeln ein Nested Dict formen: {LK_ID: {Datum: Value} }
 def acc_Data(data):
     akkData = createCDict(bev_to_Dict())
     for row in data:
@@ -44,6 +44,3 @@ def acc_Data(data):
         elif lk_id in akkData and date in akkData[lk_id]:
             akkData[lk_id][date] = akkData[lk_id][date]+value
     return akkData
-#why tho? 
-def C_Datensatz_erstellen (data):
-    return acc_Data(data)

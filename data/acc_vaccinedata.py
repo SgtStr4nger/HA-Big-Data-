@@ -102,7 +102,3 @@ def V_Datensatz_erstellen():
 def Print_V_Dataset(Data):
     for id in Data:
         print(id, ":", Data[id]['2022-01-16'])
-
-
-
-#Print_V_Dataset(V_Dict_BL())
