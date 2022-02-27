@@ -41,7 +41,7 @@ def PlotRawData(C_Data):
     plt.legend(loc='upper left')
     plt.xlabel("Date", labelpad=0.25)
     plt.ylabel("New infections per 100k inhabitants", labelpad=15)
-    plt.title("Raw infection data")
+    plt.title("Raw incidence data")
     plt.savefig('RawDataPlot.png', dpi=1000)
     plt.show()
 
@@ -51,7 +51,7 @@ def PlotMAData(C_Data):
     plt.legend(loc='upper left')
     plt.xlabel("Date", labelpad=0.25)
     plt.ylabel("New infections per 7 days per 100k inhabitants", labelpad=15)
-    plt.title("7 day moving average infection data")
+    plt.title("7 day moving average incidence data")
     plt.savefig('MADataPlot.png', dpi=1000)
     plt.show()
 
@@ -61,7 +61,7 @@ def PlotNormData(C_Data):
     plt.legend(loc='upper left')
     plt.xlabel("Date", labelpad=0.25)
     plt.ylabel("New infections per 7 days per 100k inhabitants", labelpad=15)
-    plt.title("Normalized 7 day moving average infection data")
+    plt.title("Normalized 7 day moving average incidence data")
     plt.savefig('NormDataPlot.png', dpi=1000)
     plt.show()
 
@@ -119,7 +119,7 @@ def KMeans_on_df(i):
             row_i += 1
             column_j = 0
     fig.supxlabel('Date')
-    fig.supylabel('Normalized 7 day moving average infection data')
+    fig.supylabel('Normalized 7 day moving average incidence data')
     plt.savefig('4x4_Cluster_dynamic_axes.png', dpi=1000)
 
 
